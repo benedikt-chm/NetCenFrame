@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "netcenframe"
+version = "0.0.1"
+authors = [
+    { name="Benedikt Chmielewski", email="bc222dz@student.lnu.se" },
+]
+description = "Wrapper around NetCenLib that produces as output a sorted pandas DataFrame"
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "pandas",
+    "networkx",
+    "netcenlib",
+    "nx-parallel",
+    "joblib",
+]
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+
+[project.urls]
+Homepage = "https://github.com/pypa/sampleproject"
+Issues = "https://github.com/pypa/sampleproject/issues"
+
+[tool.setuptools]
+packages = ["netcenframe"]
