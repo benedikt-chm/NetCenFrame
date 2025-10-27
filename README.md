@@ -1,6 +1,6 @@
 # Python package for the analysis of complex networks
 
-is it a fork? is it a re-implementation?
+Is it a fork? Is it a re-implementation?
 I don't know!
 What I do know is that this project uses for the implementations
 the algorithms from the projects [NetCenLib](https://github.com/damianfraszczak/netcenlib) and [NetworkX](https://github.com/networkx/networkx).
@@ -17,19 +17,29 @@ sorted and/or with the computed values re-scaled pandas DataFrame.
 ```pip install netcenframe```
 
 ### parameters
-- parallel_active:  default is True; to deactivate nx-parallel
-  - can be used if you've got your own parallel settings using joblib (only 
-available for some of the NetworkX 
+
+
+### configuration
+To configure the library, there is a `netcenframe.centrality.configure()` functionality
+where settings can be passed to for the duration of the program's runtime
+- parallel_active: default is True; to deactivate nx-parallel
+  - can be used if you've got your own parallel settings using joblib (only
+available for some of the NetworkX
     algorithms)
-- n_jobs: default is 3; 
+- n_jobs: default is 3;
+    - number of threads to create (to speed up processing) only for supported networkx algorithms
+- sort: default is True
+    - sorts the returned dataframe from highest to lowest centrality value
+- relativize default is True
+    - convert the computed centrality values into relative percentage values, which may aid when comparing between different centralities
 
 ### usage
-is then a function call similar to 
+is then a function call similar to
 ```python
 netcenframe.compute_centrality(\$graph, BETWEENNESS, True, 7)
 ```
 which will then compute the graph measure betweenness centrality
-via the library NetworkX and return a pandas DataFrame which is 
+via the library NetworkX and return a pandas DataFrame which is
 already sorted and the computed centrality values are (for this specific
 call) re-scaled. At the same time the returned dataframe is also saved as
 in CSV format for later usage, for example in other programs.

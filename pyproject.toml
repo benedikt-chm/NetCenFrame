@@ -1,16 +1,19 @@
 [build-system]
-requires = ["setuptools", "setuptools-scm"]
+requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
+# build-backend = "backend"
 
 [project]
+# name = "netcenframe"
 name = "netcenframe"
-version = "0.0.1"
+version = "0.0.3"
 authors = [
-    { name="Benedikt Chmielewski", email="bc222dz@student.lnu.se" },
+    { name="Benedikt", email="benedikt_chmie@web.de" },
 ]
 description = "Wrapper around NetCenLib that produces as output a sorted pandas DataFrame"
 readme = "README.md"
 requires-python = ">=3.9"
+keywords = ["network", "analysis", "centrality"]
 classifiers = [
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",
@@ -31,3 +34,6 @@ Issues = "https://github.com/pypa/sampleproject/issues"
 
 [tool.setuptools]
 packages = ["netcenframe"]
+
+# [tool.setuptools_scm]
+# version = {tag = v0.0.1}
