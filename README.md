@@ -22,24 +22,38 @@ sorted and/or with the computed values re-scaled pandas DataFrame.
 ### configuration
 To configure the library, there is a `netcenframe.centrality.configure()` functionality
 where settings can be passed to for the duration of the program's runtime
-- parallel_active: default is True; to deactivate nx-parallel
-  - can be used if you've got your own parallel settings using joblib (only
-available for some of the NetworkX
-    algorithms)
-- n_jobs: default is 3;
-    - number of threads to create (to speed up processing) only for supported networkx algorithms
 - sort: default is True
     - sorts the returned dataframe from highest to lowest centrality value
-- relativize default is True
-    - convert the computed centrality values into relative percentage values, which may aid when comparing between different centralities
+The default settings need to be applied with a call to `netcenframe.centrality.configure()`
+ - They aren't automatically applied because some people would like to use their own parallel settings.
 
-### usage
-is then a function call similar to
-```python
-netcenframe.compute_centrality(\$graph, BETWEENNESS, True, 7)
-```
-which will then compute the graph measure betweenness centrality
+
+
+Calls to compute centralities looks like the examples below, in which the
+graph measure betweenness centrality will be computed
 via the library NetworkX and return a pandas DataFrame which is
-already sorted and the computed centrality values are (for this specific
-call) re-scaled. At the same time the returned dataframe is also saved as
-in CSV format for later usage, for example in other programs.
+already sorted. Before a dataframe is returned, the data is saved
+as a file in CSV format for later usage, for example in other programs.
+
+
+
+### Two ways of calling functionalities in the library
+#### example usage with imports and configuration:
+```python
+# imports for netcenframe to make it easier to use
+from netcenframe.centrality import compute_centrality as compute
+from netcenframe.centrality import configure
+from netcenframe.taxonomies.Centrality import BETWEENNESS, CLOSENESS, DEGREE
+
+configure()
+sorted_df = compute(/$graph, BETWEENNESS)
+```
+
+#### example without imports
+```python
+import netcenframe
+# apply config:
+netcenframe.centrality.configure()
+# run centrality
+sorted_df = netcenframe.centrality.compute_centrality(/$graph, netcenframe.taxonomies.Centrality.BETWEENNESS)
+```

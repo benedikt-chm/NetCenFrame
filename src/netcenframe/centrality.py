@@ -2,15 +2,10 @@
 import networkx as nx
 import pandas as pd
 import netcenframe.algorithms as ncf_algos
-# import algorithms as ncf_algos
 from netcenframe.taxonomies import Centrality
-# from taxonomies import Centrality
 import netcenframe.configuration as ncf_cfg
 
 
-# def compute_centrality(network: nx.Graph, centrality: Centrality, relativize: bool,
-#                        parallel_active: bool = True, n_jobs: int = 3,
-#                        sort: bool = True, *args, **kwargs) -> pd.DataFrame:
 def compute_centrality(network: nx.Graph, centrality: Centrality,
                        *args, **kwargs) -> pd.DataFrame:
 
@@ -18,7 +13,6 @@ def compute_centrality(network: nx.Graph, centrality: Centrality,
     Compute centrality measure for a give network
 
     """
-    # global ncf_cfg
     centrality_function_name: str = f"{centrality.value.lower()}_centrality"
     nxp_config = nx.config.backends.parallel
     nxp_config.active = ncf_cfg.Config.parallel_active
@@ -31,11 +25,7 @@ def compute_centrality(network: nx.Graph, centrality: Centrality,
                                             columns=['node', centrality])
     if ncf_cfg.Config.sort:
         network_df.sort_values(by=[centrality], axis=0, ascending=True, inplace=True)
-
-    if ncf_cfg.Config.relativize:
-        # centrality_df = getattr(ncf_algos, centrality_function_name)(network, *args, **kwargs)
-        total = network_df[centrality.value.lower()].sum()
-        return network_df.loc[centrality.value.lower()].apply(lambda x: (x * 100) / total)
+    network_df.to_csv(centrality.value + '.csv')
     return network_df
 
 
@@ -60,3 +50,4 @@ def test_config():
     print("n_jobs in netcenframe: ", ncf_cfg.Config.n_jobs)
     print("parallel in NX: ", nx.config.backends.parallel.active)
     print("number of jobs: ", nx.config.backends.parallel.n_jobs)
+    print("will sort df?: ", ncf_cfg.Config.sort)
